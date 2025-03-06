@@ -18,6 +18,8 @@ services:
   psql:
     container_name: psql
     image: postgres:13-alpine
+    ports:  # Port mapping for PostgreSQL.
+      - 5432:5432  # Map host port 5432 to container port 5432.
     volumes:
       - ./data/postgres/data:/var/lib/postgresql/data/
     env_file:
