@@ -3,10 +3,21 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 50px;
+  overflow: hidden; /* Ensure the text doesn't overflow the body */
 }
 
 h1 {
   color: #ffffff;
   font-size: 48px;
   margin-top: 20%;
+  animation: move 5s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

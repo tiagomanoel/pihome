@@ -13,13 +13,14 @@ ENV PYTHONUNBUFFERED 1
 # Copia a pasta "djangoapp" e "scripts" para dentro do container.
 COPY djangoapp /djangoapp
 COPY scripts /scripts
+COPY mosquitto.conf /mosquitto.conf
 
 # Entra na pasta djangoapp no container
 WORKDIR /djangoapp
 
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
-EXPOSE 8000
+EXPOSE 8000 1883
 
 # RUN executa comandos em um shell dentro do container para construir a imagem. 
 # O resultado da execução do comando é armazenado no sistema de arquivos da 
@@ -40,6 +41,7 @@ RUN python -m venv /venv && \
   chmod -R 755 /data/web/static/admin && \
   chmod -R 755 /data/web/static && \
   chmod -R 755 /data/web/media && \
+  apk --no-cache add mosquitto mosquitto-clients && \
   chmod -R +x /scripts
 
 # Adiciona a pasta scripts e venv/bin 
@@ -50,4 +52,4 @@ ENV PATH="/scripts:/venv/bin:$PATH"
 USER duser
 
 # Executa o arquivo scripts/commands.sh
-CMD ["commands.sh"]
+CMD ["sh", "-c", "/usr/sbin/mosquitto -c /mosquitto.conf & commands.sh"]
