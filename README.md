@@ -16,23 +16,36 @@ cd piHome
 
 ### Step 2: Configure the Environment Variables
 
-Create a `.env` file inside the `dotenv_files` directory with the following content:
+Rename the `.env-example` file inside the `dotenv_files` directory to `.env` and update the configurations as needed:
+
+```sh
+mv dotenv_files/.env-example dotenv_files/.env
+```
+
+Edit the `.env` file with the following content:
 
 ```properties
-SECRET_KEY="your-secret-key"
+SECRET_KEY="your-secret-key"  # You can generate a secret key using: python -c "import secrets; print(secrets.token_urlsafe(50))"
 
 # 0 False, 1 True
 DEBUG="1"
 
 # Comma Separated values
-ALLOWED_HOSTS="127.0.0.1, localhost"
+ALLOWED_HOSTS="127.0.0.1,localhost"
 
 DB_ENGINE="django.db.backends.postgresql"
-POSTGRES_DB="data_db"
-POSTGRES_USER="pihome_user"
-POSTGRES_PASSWORD="pihome_password"
-POSTGRES_HOST="psql"
+POSTGRES_DB="your-database-name"
+POSTGRES_USER="your-database-user"
+POSTGRES_PASSWORD="your-database-password"
+POSTGRES_HOST="your-database-host"
 POSTGRES_PORT="5432"
+
+# MQTT broker configurations
+MQTT_HOST="your-mqtt-host"
+MQTT_PORT="1883"
+MQTT_CLIENT_NAME="your-client-name"
+MQTT_KEEPALIVE="60"
+MQTT_TOPIC="your-topic"
 ```
 
 #### Generating a Django `SECRET_KEY`
@@ -109,4 +122,3 @@ Replace `/path/to/project` with the path to your project directory.
 
 ![Email](https://img.shields.io/badge/Email-tiagomanoel@tiagomanoel.com.br-blue?style=flat-square&logo=gmail)
 ![GitHub](https://img.shields.io/badge/GitHub-tiagomanoel-blue?style=flat-square&logo=github)
-
