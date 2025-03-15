@@ -41,7 +41,7 @@ RUN python -m venv /venv && \
   chmod -R 755 /data/web/static/admin && \
   chmod -R 755 /data/web/static && \
   chmod -R 755 /data/web/media && \
-  apk --no-cache add mosquitto mosquitto-clients && \
+  apk --no-cache add mosquitto && \
   chmod -R +x /scripts
 
 # Adiciona a pasta scripts e venv/bin 
