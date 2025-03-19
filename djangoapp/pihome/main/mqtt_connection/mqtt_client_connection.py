@@ -8,17 +8,17 @@ class MqttClientConnection:
         self.__client_name = client_name
         self.__keepalive = keepalive
         self.__topic = topic
-        self.__client = mqtt.Client(client_id=self.__client_name, protocol=mqtt.MQTTv5, userdata={'topic': self.__topic})
+        self.client = mqtt.Client(client_id=self.__client_name, protocol=mqtt.MQTTv5, userdata={'topic': self.__topic})
 
     def start_connection(self):
-        self.__client.on_connect = on_connect
-        self.__client.on_message = on_message
-        self.__client.on_subscribe = on_subscribe
-        self.__client.on_disconnect = on_disconnect
-        self.__client.connect(self.__broker_ip, self.__port, self.__keepalive)
-        self.__client.loop_start()
+        self.client.on_connect = on_connect
+        self.client.on_message = on_message
+        self.client.on_subscribe = on_subscribe
+        self.client.on_disconnect = on_disconnect
+        self.client.connect(self.__broker_ip, self.__port, self.__keepalive)
+        self.client.loop_start()
 
     def stop_connection(self):
-        self.__client.loop_stop()
-        self.__client.disconnect()
+        self.client.loop_stop()
+        self.client.disconnect()
 

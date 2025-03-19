@@ -8,5 +8,22 @@
   </head>
   <body>
     <h1>Em Construção teste!</h1>
+    <button id="toggleButton">Ligar/Desligar</button>
+    <script>
+      document.getElementById('toggleButton').addEventListener('click', function() {
+        fetch('/light-room/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: JSON.stringify({ action: 'toggle' })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.message);
+        });
+      });
+    </script>
   </body>
 </html>
